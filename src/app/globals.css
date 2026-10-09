@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0F172A;
+  --color-ink-2: #131C31;
+  --color-ink-3: #1A2540;
+  --color-line: #263250;
+  --color-cream: #F1F5F9;
+  --color-cream-dim: #AEB8C8;
+  --color-cream-mute: #7C889C;
+  --color-teal: #14B8A6;
+  --color-teal-glow: #2DD4BF;
+  --color-gold: #D4AF37;
+  /* v2.5 light-surface tokens (section 05 cards) */
+  --color-surface: #FFFFFF;
+  --color-mist: #E2E8F0;
+  --color-mist-deep: #CBD5E1;
+  --font-mono: "Montserrat Variable", "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* v2.3: Montserrat everywhere. --font-mono kept as a token name so existing classes keep working. */
+  --font-sans: "Montserrat Variable", "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root { color-scheme: dark; }
+
+html { background: var(--color-ink); }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--color-teal); color: var(--color-ink); }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+:focus-visible { outline: 2px solid var(--color-teal-glow); outline-offset: 3px; }
+/* sections receive programmatic focus after in-page navigation; no ring for that */
+section[tabindex="-1"]:focus { outline: none; }
+.eco-node:focus-visible { outline: none; }
+.eco-node:focus-visible > rect:not([fill="none"]) { stroke: var(--color-teal-glow); stroke-width: 2.5; }
+
+/* v2.4 glassmorphism (navbar). Fallback keeps a solid surface where backdrop-filter is unsupported. */
+.glass {
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.12), rgba(241, 245, 249, 0.04));
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  border: 1px solid rgba(241, 245, 249, 0.16);
+  box-shadow: inset 0 1px 0 rgba(241, 245, 249, 0.2), 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+}
+.glass-strong {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(26, 37, 64, 0.82));
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border-color: rgba(241, 245, 249, 0.14);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-strong { background: rgba(19, 28, 49, 0.96); }
+}
+
+/* v2.5 section 05: soft slate backdrop so white cards read as lifted surfaces. */
+.section-mist {
+  background-color: var(--color-mist);
+  background-image:
+    radial-gradient(60% 50% at 85% 0%, color-mix(in srgb, var(--color-teal) 12%, transparent), transparent 70%),
+    radial-gradient(color-mix(in srgb, var(--color-ink) 9%, transparent) 1px, transparent 1px),
+    linear-gradient(180deg, var(--color-mist) 0%, var(--color-mist-deep) 100%);
+  background-size: auto, 22px 22px, auto;
+}
+
+/* v2.5 industry card: layered shadows + top highlight; hover lift, teal border and glow. */
+.industry-card {
+  background-image: linear-gradient(180deg, var(--color-surface) 0%, var(--color-cream) 100%);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  box-shadow:
+    inset 0 1px 0 var(--color-surface),
+    0 1px 2px color-mix(in srgb, var(--color-ink) 8%, transparent),
+    0 8px 18px -8px color-mix(in srgb, var(--color-ink) 18%, transparent),
+    0 24px 40px -24px color-mix(in srgb, var(--color-ink) 30%, transparent);
+  transition: transform 250ms var(--ease-out-expo), border-color 250ms ease, box-shadow 250ms ease;
+}
+.industry-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-teal);
+  box-shadow:
+    inset 0 1px 0 var(--color-surface),
+    0 2px 4px color-mix(in srgb, var(--color-ink) 8%, transparent),
+    0 14px 26px -10px color-mix(in srgb, var(--color-ink) 22%, transparent),
+    0 26px 44px -14px color-mix(in srgb, var(--color-teal) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-card:hover { transform: none; }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(241, 245, 249, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(241, 245, 249, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes eco-dash { to { stroke-dashoffset: -28; } }
+.eco-flow { animation: eco-dash 1.1s linear infinite; }
