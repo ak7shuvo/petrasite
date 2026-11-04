@@ -10,9 +10,9 @@ export const site = {
   tagline: "Software that runs hospitality.",
   description:
     "PETRA builds hospitality software in Bangladesh: PetraPMS for hotel property management, PetraPOS for restaurant and outlet point of sale, and PetraDMS for distribution management.",
-  email: "letterbox5509@gmail.com",
-  phone: "01609347600",
-  phoneHref: "+8801609347600",
+  email: "petraitbd@gmail.com",
+  phone: "01616154320",
+  phoneHref: "+8801616154320",
   country: "Bangladesh",
   url: siteUrl,
   urlConfigured: Boolean(process.env.NEXT_PUBLIC_SITE_URL),
