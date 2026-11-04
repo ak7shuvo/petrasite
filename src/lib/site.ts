@@ -1,14 +1,19 @@
+
 /**
  * Canonical site URL. Set NEXT_PUBLIC_SITE_URL in production (see .env.example).
- * Without it, local builds fall back to localhost and a build warning is printed by next.config.ts.
+ * Without it, local builds fall back to the production domain.
  */
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://petrait.site").replace(/\/+$/, "");
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://petrait.site"
+).replace(/\/+$/, "");
+
 export const site = {
   name: "PETRA",
   legalName: "PETRA Software Solutions",
-  tagline: "Software that runs hospitality.",
+  tagline: "Technology Built Around You.",
+  subtitle: "From Ideas to Intelligent Solutions.",
   description:
-    "PETRA builds hospitality software in Bangladesh: PetraPMS for hotel property management, PetraPOS for restaurant and outlet point of sale, and PetraDMS for distribution management.",
+    "We build custom software, mobile and desktop applications, AI/ML models, websites, and business systems—tailored to individuals, startups, and enterprises.",
   email: "petraitbd@gmail.com",
   phone: "01616154320",
   phoneHref: "+8801616154320",
@@ -16,8 +21,8 @@ export const site = {
   url: siteUrl,
   urlConfigured: Boolean(process.env.NEXT_PUBLIC_SITE_URL),
   version: "v2.6",
-  /** PETRA, spelled out: one word per letter. */
-  motto: ["Property", "Excellence", "Through", "Reliable", "Automation"],
+  /** PETRA's brand motto. */
+  motto: ["Built on Trust"],
 };
 
 export const nav = [
