@@ -73,7 +73,7 @@ export function Footer({ home = true }: { home?: boolean }) {
       <div className="border-t border-line">
         <Container className="flex flex-wrap items-center justify-between gap-3 py-6 text-[12px] text-cream-mute max-md:py-4">
           <span>© {new Date().getFullYear()} {site.legalName}. All rights reserved.</span>
-          <span className="flex items-center gap-2"><i aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />Build version {site.version}</span>
+         <span className="flex items-center gap-2"><i aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />{site.motto}</span>
         </Container>
       </div>
     </footer>
